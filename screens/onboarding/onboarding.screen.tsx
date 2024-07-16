@@ -1,10 +1,16 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  Pressable,
+  Text,
+  View
+} from 'react-native';
 import React from 'react';
 import { useFonts } from 'expo-font';
 import { Raleway_700Bold } from '@expo-google-fonts/raleway';
 import { Nunito_400Regular, Nunito_700Bold } from '@expo-google-fonts/nunito';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '@/styles/onboarding/onboard';
+import { router } from 'expo-router';
 
 export default function OnBoardingScreen() {
   let [fontsLoaded, fontsError] = useFonts({
@@ -12,7 +18,8 @@ export default function OnBoardingScreen() {
     Nunito_400Regular,
     Nunito_700Bold
   });
-  if (!fontsLoaded && !fontsError) {
+
+  if (!fontsLoaded && fontsError) {
     return null;
   }
   return (
@@ -46,6 +53,24 @@ export default function OnBoardingScreen() {
           QuangDev
         </Text>
       </View>
+      <View style={styles.dscpWrapper}>
+        <Text style={[styles.dscpText, { fontFamily: 'Nunito_400Regular' }]}>
+          Explore a variety of interaction
+        </Text>
+        <Text style={[styles.dscpText, { fontFamily: 'Nunito_400Regular' }]}>
+          Video, quizze & assignment.
+        </Text>
+      </View>
+      <Pressable
+        style={styles.buttonWrapper}
+        onPress={() => {
+          router.push('/(routes)/welcome-intro');
+        }}
+      >
+        <Text style={[styles.buttonText, { fontFamily: 'Nunito_700Bold' }]}>
+          Getting Started
+        </Text>
+      </Pressable>
     </LinearGradient>
   );
 }
